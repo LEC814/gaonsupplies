@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>학급 별 분필 개수 입력</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        .low-chalk {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>학급 별 분필 개수 입력</h1>
+
+        <form action="/" method="POST">
+            <label for="class_name">반 이름(1-1과 같이 입력):</label>
+            <input type="text" id="class_name" name="class_name" required><br><br>
+
+            <label for="chalk_count">분필 개수:</label>
+            <input type="number" id="chalk_count" name="chalk_count" required><br><br>
+
+            <button type="submit">입력</button>
+        </form>
+
+        <h2>입력된 학급 별 분필 개수</h2>
+        <ul>
+            {% for class_name, chalk_count in classrooms.items() %}
+                <li class="{% if chalk_count <= 2 %}low-chalk{% endif %}">{{ class_name }}: {{ chalk_count }} 개</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
+
